@@ -1,0 +1,153 @@
+{% load staticfiles%}
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Water Management System</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="{% static 'plants/css/main.css' %}" />
+		<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">-->
+		
+	</head>
+	<body>
+
+		<!-- Header -->			<div id="header">
+
+				<div class="top">
+
+					<!-- Logo -->
+						<div id="logo">
+							<span class="image avatar48" style="background-color:inherit !important;"><img src="{% static 'plants/images/man.svg' %}" alt="" /></span>
+							<h1 id="title">{{ username }}</h1>
+							
+						</div>
+
+					<!-- Nav -->
+						<nav id="nav">
+							<!--
+
+								Prologue's nav expects links in one of two formats:
+
+								1. Hash link (scrolls to a different section within the page)
+
+								   <li><a href="#foobar" id="foobar-link" class="icon fa-whatever-icon-you-want skel-layers-ignoreHref"><span class="label">Foobar</span></a></li>
+
+								2. Standard link (sends the user to another page/site)
+
+								   <li><a href="http://foobar.tld" id="foobar-link" class="icon fa-whatever-icon-you-want"><span class="label">Foobar</span></a></li>
+
+							-->
+							<ul>
+								<!-- <li><a href="#top" id="top-link" class="skel-layers-ignoreHref"><span class="icon fa-home">Map</span></a></li> -->
+								<li><a href="#about" id="about-link" class="skel-layers-ignoreHref"><span class="icon fa-user">About Us</span></a></li>
+								<li><a href="/addwaterdata/" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa-envelope">Add Water Data</span></a></li>
+								<li><a href="/search_waterdata/" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa-envelope">Search Water Data</span></a></li>
+								<li><a href="/all_waterdata/" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa-envelope">All Water Data</span></a></li>
+								<a href="{% url 'auth_part:logout' %}"><button style="margin-right: 20px;margin-top: 10px;">Logout</button></a>								
+								<center><li>Your  Water Data</li></center>
+								<hr/>								
+								{% for plant in plants %}
+									{% if plant.alias %}
+										<a style="text-align:center;" href="{{plant.get_absolute_url}}"><div style="font-size:1rem; font-weight:bold;">{{plant.alias}}</div></a><hr/>
+									{% else %}
+										<a style="text-align:center;" href="{{plant.get_absolute_url}}"><div style="font-size:1rem; font-weight:bold;">{{plant.alias}}</div></a><hr/>
+									{% endif %}		
+									</a>
+								{% endfor %}
+							</ul>
+						</nav>
+
+				</div>
+
+			<!--	<div class="bottom">
+
+					
+						<ul class="icons">
+							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+							<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+							<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+						</ul>
+
+				</div> -->
+
+			</div>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- Intro -->
+					<section id="top" class="one dark cover">
+						<div class="container">
+
+					
+							  <div class="card-header text-center">Search By</div>
+					      <div class="card-body">
+					        <form action="/search_result/" method="get">
+					        {% csrf_token %} 
+					         
+					          <div class="form-group">
+					            <div class="form-row">
+					              <div class="col-md-12">
+					                <label for="exampleInputName">Search</label>
+					                <input class="form-control" name="q" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Enter data">
+					              </div>
+					            </div>
+					          </div>
+
+
+					          </div>
+					          <button value="submit" class="btn btn-primary btn-block col-md-12">Submit Data</button>
+					        </form>
+					        
+					      </div>
+					    </div>
+						</div>
+					</section>
+
+			
+
+				<!-- About Us -->
+					<section id="about" class="three">
+						<div class="container">
+
+							<header>
+								<h2>About Us</h2>
+							</header>
+
+
+						</div>
+					</section>
+
+				<!-- Contact -->
+					<section id="contact" class="four">
+						
+							
+
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<div id="footer">
+				<hr style="clear:both;margin-bottom:3%; width:80%;border: 1.5px solid #988;">
+				<!-- Copyright -->
+					<ul class="copyright" style="float:right;margin-right:100px;">
+						<li>Designed by: <a href="#" target="blank">Group 12</a></li>
+					</ul>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'plants/js/jquery.min.js' %}"></script>
+			<script src="{% static 'plants/js/jquery.scrolly.min.js' %}"></script>
+			<script src="{% static 'plants/js/jquery.scrollzer.min.js' %}"></script>
+			<script src="{% static 'plants/js/skel.min.js' %}"></script>
+			<script src="{% static 'plants/js/util.js' %}"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="{% static 'plants/js/main.js' %}"></script>
+
+	</body>
+</html>
